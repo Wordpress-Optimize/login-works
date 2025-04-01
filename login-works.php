@@ -9,7 +9,7 @@ Plugin URI: https://wordpressoptimize.com
 Description: Customize. Secure. Simplify.
 Version: 1.0
 Author: Alex Seif
-Author URI: https://wordpressoptimize.com
+Author URI: https://alexseif.com
 License: GPL2
 Text Domain: login-works
 */

@@ -18,7 +18,12 @@ Text Domain: login-works
 // Enqueue custom styles for the login page
 function login_works_enqueue_styles()
 {
-    wp_enqueue_style('login-works-custom-login', plugin_dir_url(__FILE__) . 'css/custom-login.css');
+    wp_enqueue_style(
+        'login-works-custom-login', // Handle
+        plugin_dir_url(__FILE__) . 'css/custom-login.css', // File URL
+        [], // Dependencies
+        '1.0.0' // Version
+    );
 }
 add_action('login_enqueue_scripts', 'login_works_enqueue_styles');
 
@@ -94,11 +99,11 @@ function login_works_render_settings_page()
 function login_works_register_settings()
 {
     // Register the setting to store the logo URL
-    register_setting('login_works_settings', 'login_works_logo', [
-        'type' => 'string',
-        'sanitize_callback' => 'esc_url_raw',
-        'default' => ''
-    ]);
+    register_setting(
+        'login_works_settings', // Option group
+        'login_works_logo',     // Option name
+        'login_works_sanitize_logo_url' // Explicit sanitization callback
+    );
 
     // Add a section to the settings page
     add_settings_section(
@@ -119,18 +124,26 @@ function login_works_register_settings()
 }
 add_action('admin_init', 'login_works_register_settings');
 
+// Sanitization callback for the logo URL
+function login_works_sanitize_logo_url($input)
+{
+    // Ensure the input is a valid URL
+    return esc_url_raw($input);
+}
+
 // Callback function for the logo upload field
 function login_works_logo_field_callback()
 {
     $logo_url = get_option('login_works_logo', '');
+    $attachment_id = attachment_url_to_postid($logo_url); // Get the attachment ID from the URL
 ?>
     <input type="hidden" id="login_works_logo" name="login_works_logo" value="<?php echo esc_attr($logo_url); ?>" />
     <button type="button" class="button" id="upload_logo_button">Upload Logo</button>
     <button type="button" class="button" id="remove_logo_button" style="<?php echo empty($logo_url) ? 'display: none;' : ''; ?>">Remove Logo</button>
     <p class="description">Upload or select a logo from the Media Library.</p>
     <div id="logo_preview" style="margin-top: 10px;">
-        <?php if (!empty($logo_url)) : ?>
-            <img src="<?php echo esc_url($logo_url); ?>" alt="Logo Preview" style="max-width: 200px; height: auto;" />
+        <?php if (!empty($attachment_id)) : ?>
+            <?php echo wp_get_attachment_image($attachment_id, 'medium', false, ['alt' => 'Logo Preview', 'style' => 'max-width: 200px; height: auto;']); ?>
         <?php endif; ?>
     </div>
 <?php

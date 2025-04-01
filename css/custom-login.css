@@ -1,0 +1,15 @@
+/* Custom styles for the WordPress login page */
+body.login {
+  background-color: #f4f4f4;
+}
+
+.login h1 a {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.login form {
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}

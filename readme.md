@@ -21,6 +21,14 @@ Login Works is a WordPress plugin designed to enhance the WordPress admin login 
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 3. Add your logo to the `assets/logo.png` file.
 
+## Contributing
+
+We welcome contributions to improve Login Works. Please follow these steps:
+
+1. Fork the repository.
+2. Create a new branch for your feature or bugfix.
+3. Submit a pull request with a detailed description of your changes.
+
 ## Author
 - **Name:** Alex Seif
 - **Email:** alex.seif@gmail.com

@@ -1,14 +1,19 @@
 <?php
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly
+}
+
 /*
 Plugin Name: Login Works
 Plugin URI: https://wordpressoptimize.com
-Description: Customize the WordPress login page with your site logo and styles.
+Description: Customize. Secure. Simplify.
 Version: 1.0
 Author: Alex Seif
 Author URI: https://wordpressoptimize.com
 License: GPL2
 Text Domain: login-works
 */
+
 
 // Enqueue custom styles for the login page
 function login_works_enqueue_styles()
